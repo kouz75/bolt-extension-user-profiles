@@ -23,18 +23,18 @@ There you can define new fields for your users, setup some options for the avata
 
 This extension provides an `avatar()` twig function to get the avatar URL for a given user.
 
-#### Default usage:
+##### Default usage:
 ```
 <img src="{{ avatar(record.user) }}">
 ```
 
-#### Override Gravatar size
+##### Override Gravatar size
 If you have Gravatar fallback enabled, it uses `100` as default size.
 ```
 <img src="{{ avatar(record.user, 50) }}">
 ```
 
-#### Override default fallback URL
+##### Override default fallback URL
 You can also override the default fallback URL you have set in the extension config.
 ```
 <img src="{{ avatar(record.user, 50, 'https://domain.com/avatar.png') }}">
