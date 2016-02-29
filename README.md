@@ -49,6 +49,18 @@ This extension provides an `profile_link()` twig function to get the profile URL
 <a href="{{ profile_link(record.user) }}"></a>
 ```
 
+### User profiles
+
+This extension provides the functionality to add user profiles to your Website/Blog/etc.
+User profiles are enabled by default and try to use `profile.twig` as template but you can override everything in the extension config.
+
+The user will be injected as `user` variable into your profile template.
+
+##### Example: Get all Entries for the user
+```
+{% setcontent entries = 'entries' where {ownerid: user.id} %}
+```
+
 ---
 
 ### License
