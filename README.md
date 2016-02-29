@@ -30,12 +30,13 @@ This extension provides an `avatar()` twig function to get the avatar URL for a 
 
 ##### Override Gravatar size
 If you have Gravatar fallback enabled, it uses `100` as default size.
+You can override it with the second parameter.
 ```
 <img src="{{ avatar(record.user, 50) }}">
 ```
 
 ##### Override default fallback URL
-You can also override the default fallback URL you have set in the extension config.
+You can also override the default fallback URL you have set in the extension config with the third parameter.
 ```
 <img src="{{ avatar(record.user, 50, 'https://domain.com/avatar.png') }}">
 ```
