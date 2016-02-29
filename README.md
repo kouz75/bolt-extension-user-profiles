@@ -36,7 +36,7 @@ You can override it with the second parameter.
 ```
 
 ##### Override default fallback URL
-You can also override the default fallback URL you have set in the extension config with the third parameter.
+You can also override the default fallback URL you have set in the extension config.
 ```
 <img src="{{ avatar(record.user, 50, 'https://domain.com/avatar.png') }}">
 ```
