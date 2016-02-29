@@ -1,0 +1,36 @@
+{
+    "name": "ohlandt/user-profiles",
+    "description": "Extend the default Bolt users based on your needs and create public profile pages",
+    "type": "bolt-extension",
+    "keywords": [
+        "user",
+        "profiles",
+        "social"
+    ],
+    "require": {
+        "bolt/bolt": "^2.0"
+    },
+    "require-dev" : {
+        "phpunit/phpunit" : "^4.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Phillipp Ohlandt",
+            "email": "phillipp.ohlandt@googlemail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "files": [
+            "init.php"
+        ],
+        "psr-4": {
+            "Bolt\\Extension\\Ohlandt\\UserProfiles\\": ""
+        }
+    },
+    "extra": {
+
+    }
+}
