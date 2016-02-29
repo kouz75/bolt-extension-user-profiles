@@ -19,6 +19,10 @@ You can find the configuration file in `app\config\extensions` as `user-profiles
 
 There you can define new fields for your users, setup some options for the avatar helper and the public user profiles.
 
+### Access extended user profile form
+
+Simply go to Extras => Extended Profile
+
 ### Avatar helper
 
 This extension provides an `avatar()` twig function to get the avatar URL for a given user.
