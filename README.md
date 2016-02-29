@@ -1,10 +1,55 @@
-Bolt Extension Starter
+User Profiles for Bolt
 ======================
 
-A starter skeleton for a Bolt v2.x Extension
+This [bolt.cm](https://bolt.cm/) extension lets you add new fields to the default Bolt users.
+You can also create public profiles for your users.
+It's pretty useful when your application depends on some records in a resource contenttype.
 
-To get going run the following command, replacing the last argument with the name of your extension:
+### Installation
+1. Login to your Bolt installation
+2. Go to "View/Install Extensions" (Hover over "Extras" menu item)
+3. Type `user-profiles` into the input field
+4. Click on the extension name
+5. Click on "Browse Versions"
+6. Click on "Install This Version" on the latest stable version
 
-`composer create-project --no-install bolt/bolt-extension-starter:^2.0 <newextname>`  
+### Configuration
 
-For more information, see this page in the Bolt documentation: https://docs.bolt.cm/extensions/config 
+You can find the configuration file in `app\config\extensions` as `user-profiles.ohlandt.yml`.
+
+There you can define new fields for your users, setup some options for the avatar helper and the public user profiles.
+
+### Avatar helper
+
+This extension provides an `avatar()` twig function to get the avatar URL for a given user.
+
+#### Default usage:
+```
+<img src="{{ avatar(record.user) }}">
+```
+
+#### Override Gravatar size
+If you have Gravatar fallback enabled, it uses `100` as default size.
+```
+<img src="{{ avatar(record.user, 50) }}">
+```
+
+#### Override default fallback URL
+You can also override the default fallback URL you have set in the extension config.
+```
+<img src="{{ avatar(record.user, 50, 'https://domain.com/avatar.png') }}">
+```
+
+### User profile link helper
+
+This extension provides an `profile_link()` twig function to get the profile URL for a given user.
+
+```
+<a href="{{ profile_link(record.user) }}"></a>
+```
+
+---
+
+### License
+
+This Bolt extension is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
