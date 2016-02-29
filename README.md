@@ -51,7 +51,7 @@ This extension provides an `profile_link()` twig function to get the profile URL
 
 ### User profiles
 
-This extension provides the functionality to add user profiles to your Website/Blog/etc.
+This extension provides the functionality to add user profiles to your website/blog/etc.
 User profiles are enabled by default and try to use `profile.twig` as template but you can override everything in the extension config.
 
 The user will be injected as `user` variable into your profile template.
