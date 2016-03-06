@@ -29,6 +29,8 @@ class Extension extends BaseExtension
      * Initialize the extension
      * - Extend IntegrityChecker
      * - Register URLs
+     * - Register menu option
+     * - Triggers user object check
      * - Register Twig functions
      */
     public function initialize()
@@ -50,6 +52,8 @@ class Extension extends BaseExtension
                 ->bind('profile-extended-save');
 
             $this->addMenuOption('Extended Profile', $backendRoot . 'profile/extended', 'fa:user');
+
+            $this->checkIfUserObjectNeedsToBeUpdated();
         }
 
         if ($this->config['profiles']['enabled']) {
@@ -60,6 +64,40 @@ class Extension extends BaseExtension
 
         $this->addTwigFunction('avatar', 'avatar');
         $this->addTwigFunction('profile_link', 'profileLink');
+    }
+
+    /**
+     * Checks if the user object is up to date.
+     * Displays an update warning if needed.
+     */
+    private function checkIfUserObjectNeedsToBeUpdated()
+    {
+        if ($this->app['users']->isAllowed('dbcheck') &&
+            $this->app['users']->isAllowed('dbupdate')
+        ) {
+            $fields = $this->config['fields'];
+            $user = $this->app['users']->getCurrentUser();
+
+            $incomplete = false;
+            foreach (array_keys($fields) as $key) {
+                if (!isset($user[$key])) {
+                    $incomplete = true;
+                    break;
+                }
+            }
+
+            if ($incomplete &&
+                $this->app['paths']['current'] != $this->app['paths']['bolt'] . 'dbcheck'
+            ) {
+                $this->app['session']->getFlashBag()->set(
+                    'error',
+                    sprintf(
+                        "<b>User Profiles:</b> Your users table is outdated. Go to 'Configuration' > '<a href='%s'>Check Database</a>' to update it.",
+                        $this->app['paths']['protocol'] . '://' . $this->app['paths']['hostname'] . $this->app['paths']['bolt'] . 'dbcheck'
+                    )
+                );
+            }
+        }
     }
 
     /**
