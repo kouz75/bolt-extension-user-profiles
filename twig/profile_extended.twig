@@ -46,6 +46,8 @@
                             {% include 'field_text.twig' with data %}
                         {% elseif values.type == "textarea" %}
                             {% include 'field_textarea.twig' with data %}
+                        {% elseif values.type == "checkbox" %}
+                            {% include 'field_checkbox.twig' with data %}
                         {% else %}
 
                         {% endif %}

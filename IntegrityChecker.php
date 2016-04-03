@@ -49,6 +49,9 @@ class IntegrityChecker extends BoltIntegrityChecker
                         case 'textarea':
                             $table->addColumn($key, 'text', array('default' => ''));
                             break;
+                        case 'checkbox':
+                            $table->addColumn($key, 'boolean', array('default' => 0));
+                            break;
                         default:
                             $table->addColumn($key, 'text', array('default' => ''));
                     }

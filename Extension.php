@@ -207,6 +207,13 @@ class Extension extends BaseExtension
             }
         }
 
+        // handle weird weirdness with weird input fields like checkboxes
+        foreach($this->config['fields'] as $key => $field){
+            if($field['type'] === "checkbox"){
+                $data[$key] = $data[$key] ? 1 : 0;
+            }
+        }
+
         return $data;
     }
 
