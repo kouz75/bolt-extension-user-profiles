@@ -56,14 +56,13 @@ class Extension extends BaseExtension
             $this->checkIfUserObjectNeedsToBeUpdated();
         }
 
-        if ($this->config['profiles']['enabled']) {
-            $this->app
-                ->get($this->config['profiles']['prefix'] . '/{username}', array($this, 'publicProfile'))
-                ->bind('public-profile');
-        }
+        $this->app
+            ->get($this->config['profiles']['prefix'] . '/{username}', array($this, 'publicProfile'))
+            ->bind('public-profile');
 
         $this->addTwigFunction('avatar', 'avatar');
         $this->addTwigFunction('profile_link', 'profileLink');
+        $this->addTwigFunction('has_profile', 'hasProfile');
     }
 
     /**
@@ -158,7 +157,9 @@ class Extension extends BaseExtension
      */
     public function publicProfile(Request $request, $username)
     {
-        if (!$user = $this->app['users']->getUser($username)) {
+        $user = $this->app['users']->getUser($username);
+
+        if (!$user || !$this->hasProfile($user)) {
             throw new NotFoundHttpException;
         }
 
@@ -274,11 +275,16 @@ class Extension extends BaseExtension
      */
     public function profileLink(array $user)
     {
-        if ($this->config['profiles']['enabled']) {
+        if ($this->hasProfile($user)) {
             return '/' . $this->config['profiles']['prefix'] . '/' . $user['username'];
         }
 
         return '';
+    }
+
+    public function hasProfile(array $user)
+    {
+        return $this->config['profiles']['enabled'];
     }
 
     /**
