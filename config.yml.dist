@@ -1,5 +1,5 @@
 # Which fields do you need?
-# Currently supported types: text, textarea, checkbox
+# Currently supported types: text, textarea, checkbox, select (just values or key,value)
 fields:
   avatar:
     type: text
