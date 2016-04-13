@@ -85,7 +85,7 @@ The user will be injected as `user` variable into your profile template.
 
 ### Permissions
 
-Since version `1.0.0` of this extension, public profiles can not only just turned on and off. There are a few different factors that decide if an user has a public profile or not. You can configure everything in your extension config.
+As of version `1.0.0` of this extension, public profiles can not only just turned on and off. There are a few different factors that decide if an user has a public profile or not. You can configure everything in your extension config.
 
 If public profiles are turned on, the following settings will be used to determine if an user has a public profile or not. They will also be used for the `has_profile()` twig function.
 
