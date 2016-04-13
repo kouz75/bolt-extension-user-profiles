@@ -48,7 +48,7 @@ You can also override the default fallback URL you have set in the extension con
 <img src="{{ avatar(record.user, 50, 'https://domain.com/avatar.png') }}">
 ```
 
-### User Profile Link
+### Profile Link
 
 This extension provides an `profile_link()` twig function to get the profile URL for a given user.
 
