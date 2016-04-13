@@ -56,6 +56,20 @@ This extension provides an `profile_link()` twig function to get the profile URL
 <a href="{{ profile_link(record.user) }}"></a>
 ```
 
+### Has Profile
+
+Depending on your settings in the extension config, an user might have a profile or not. The `has_profile()` function takes care of this and returns either true or false.
+
+```
+{% if has_profile(record.user) %}
+  <a href="{{ profile_link(record.user) }}">{{ record.user.displayname }}</a>
+{% else %}
+  {{ record.user.displayname }}
+{% endif %}
+```
+
+(For further information, check out the "Permissions" section below)
+
 User Profiles
 -------------
 
@@ -68,6 +82,30 @@ The user will be injected as `user` variable into your profile template.
 ```
 {% setcontent entries = 'entries' where {ownerid: user.id} %}
 ```
+
+### Permissions
+
+Since version `1.0.0` of this extension, public profiles can not only just turned on and off. There are a few different factors that decide if an user has a public profile or not. You can configure everything in your extension config.
+
+If public profiles are turned on, the following settings will be used to determine if an user has a public profile or not. They will also be used for the `has_profile()` twig function.
+
+##### Roles
+
+`roles: [ editor, chief-editor ]`
+
+The user has to have at least one of this roles to have a public profile.
+
+##### Excluded Usernames
+
+`excluded_usernames: [ sahassar, gawain ]`
+
+Special users who shouldn't have a public profile.
+
+##### Conditional Field
+
+`conditional_field: public_profile`
+
+A field on the user object which holds either a true'ish or false'ish value to determine if the user should have a public profile or not. **Example:** Create a checkbox field to let the user decide if he wants to have a public profile.
 
 ---
 
