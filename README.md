@@ -91,19 +91,25 @@ If public profiles are turned on, the following settings will be used to determi
 
 ##### Roles
 
-`roles: [ editor, chief-editor ]`
+```
+roles: [ editor, chief-editor ]
+```
 
 The user has to have at least one of this roles to have a public profile.
 
 ##### Excluded Usernames
 
-`excluded_usernames: [ sahassar, gawain ]`
+```
+excluded_usernames: [ sahassar, gawain ]
+```
 
 Special users who shouldn't have a public profile.
 
 ##### Conditional Field
 
-`conditional_field: public_profile`
+```
+conditional_field: public_profile
+```
 
 A field on the user object which holds either a true'ish or false'ish value to determine if the user should have a public profile or not. **Example:** Create a checkbox field to let the user decide if he wants to have a public profile.
 
