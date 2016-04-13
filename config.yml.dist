@@ -37,7 +37,7 @@ profiles:
       roles: [ editor, chief-editor ]
 
       # Special users who shouldn't have a public profile.
-      excluded_usernames: [  ]
+      excluded_usernames: [ ]
 
       # A field on the user object which holds either a true'ish or false'ish value to determine
       # if the user should have a public profile or not.
