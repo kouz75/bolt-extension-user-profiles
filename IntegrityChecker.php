@@ -37,8 +37,10 @@ class IntegrityChecker extends BoltIntegrityChecker
     {
         $tables = parent::getBoltTablesSchema($schema);
 
+        $dbPrefix = $this->app['config']->get('general/database/prefix', 'bolt_');
+
         foreach ($tables as $table) {
-            if ($table->getName() == 'bolt_users') {
+            if ($table->getName() == $dbPrefix . 'users') {
 
                 foreach ($this->config['fields'] as $key => $values) {
 

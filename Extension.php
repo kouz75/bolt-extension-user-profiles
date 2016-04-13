@@ -243,7 +243,9 @@ class Extension extends BaseExtension
             $user['roles'] = json_encode(array_values(array_unique($user['roles'])));
         }
 
-        return $this->app['db']->update('bolt_users', $user, array('id' => $user['id']));
+        $dbPrefix = $this->app['config']->get('general/database/prefix', 'bolt_');
+
+        return $this->app['db']->update($dbPrefix . 'users', $user, array('id' => $user['id']));
     }
 
     /**
