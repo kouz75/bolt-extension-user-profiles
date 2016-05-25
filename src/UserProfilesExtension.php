@@ -11,4 +11,8 @@ use Bolt\Extension\SimpleExtension;
  */
 class UserProfilesExtension extends SimpleExtension
 {
+    public function getDisplayName()
+    {
+        return "User Profiles";
+    }
 }
