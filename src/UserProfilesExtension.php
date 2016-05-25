@@ -20,14 +20,16 @@ class UserProfilesExtension extends SimpleExtension
 
     private function registerUsersTableSchema(Application $app)
     {
+        $config = $this->getConfig();
+
         $app['schema.base_tables'] = $app->extend(
             'schema.base_tables',
-            function ($baseTables) use ($app) {
+            function ($baseTables) use ($app, $config) {
                 $platform = $app['db']->getDatabasePlatform();
                 $prefix = $app['schema.prefix'];
 
-                $baseTables['users'] = $app->share(function () use ($platform, $prefix) {
-                    return new UsersTable($platform, $prefix);
+                $baseTables['users'] = $app->share(function () use ($platform, $prefix, $config) {
+                    return new UsersTable($platform, $prefix, $config);
                 });
 
                 return $baseTables;
