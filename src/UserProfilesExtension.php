@@ -5,6 +5,7 @@ namespace Bolt\Extension\Ohlandt\UserProfiles;
 use Bolt\Extension\Ohlandt\UserProfiles\Storage\Schema\Table\UsersTable;
 use Bolt\Extension\SimpleExtension;
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * User Profiles extension class.
@@ -13,9 +14,21 @@ use Silex\Application;
  */
 class UserProfilesExtension extends SimpleExtension
 {
+    public function boot(Application $app)
+    {
+        parent::boot($app);
+    }
+
+    public function before(Request $request, Application $app)
+    {
+        //dump($app['users']->getCurrentUser());
+    }
+
     protected function registerServices(Application $app)
     {
         $this->registerUsersTableSchema($app);
+
+        $app->before([$this, 'before']);
     }
 
     private function registerUsersTableSchema(Application $app)
