@@ -2,6 +2,8 @@
 
 namespace Bolt\Extension\Ohlandt\UserProfiles\Avatar;
 
+use Silex\Application;
+
 class UrlResolver
 {
     protected $app;

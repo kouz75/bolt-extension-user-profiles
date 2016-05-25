@@ -23,7 +23,7 @@ class Functions
 
     public function avatar(array $user, $gravatar_size = 100, $fallback = null)
     {
-        
+
     }
 
     public function profileLink(array $user)
