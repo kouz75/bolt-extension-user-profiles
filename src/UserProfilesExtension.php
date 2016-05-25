@@ -2,10 +2,15 @@
 
 namespace Bolt\Extension\Ohlandt\UserProfiles;
 
+use Bolt\Events\SchemaEvent;
+use Bolt\Events\SchemaEvents;
 use Bolt\Extension\Ohlandt\UserProfiles\Storage\Schema\Table\UsersTable;
 use Bolt\Extension\SimpleExtension;
+use Bolt\Storage\Entity\Users;
 use Silex\Application;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User Profiles extension class.
@@ -22,6 +27,7 @@ class UserProfilesExtension extends SimpleExtension
     public function before(Request $request, Application $app)
     {
         //dump($app['users']->getCurrentUser());
+        $this->checkIfUserSessionHasToBeUpdated();
     }
 
     protected function registerServices(Application $app)
@@ -48,6 +54,31 @@ class UserProfilesExtension extends SimpleExtension
                 return $baseTables;
             }
         );
+    }
+
+    private function checkIfUserSessionHasToBeUpdated()
+    {
+        $app = $this->getContainer();
+        $config = $this->getConfig();
+        $fields = $config['fields'];
+        $user = $app['users']->getCurrentUser();
+
+        $incomplete = false;
+        foreach (array_keys($fields) as $key) {
+            if (!isset($user[$key])) {
+                $incomplete = true;
+                break;
+            }
+        }
+
+        if ($incomplete) {
+            $token = $app['session']->get('authentication');
+            $newUser = $app['users']->getUser($token->getUser()->id);
+            $newUser = new Users($newUser);
+
+            $token->setUser($newUser);
+            $app['session']->set('authentication', $token);
+        }
     }
 
     public function getDisplayName()
