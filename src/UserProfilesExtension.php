@@ -7,6 +7,7 @@ use Bolt\Events\SchemaEvent;
 use Bolt\Events\SchemaEvents;
 use Bolt\Extension\Ohlandt\UserProfiles\Controller\Backend;
 use Bolt\Extension\Ohlandt\UserProfiles\Storage\Schema\Table\UsersTable;
+use Bolt\Extension\Ohlandt\UserProfiles\Twig\Functions;
 use Bolt\Extension\SimpleExtension;
 use Bolt\Storage\Entity\Users;
 use Silex\Application;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UserProfilesExtension extends SimpleExtension
 {
+    private $twigFunctions;
+
     public function boot(Application $app)
     {
         parent::boot($app);
@@ -60,6 +63,32 @@ class UserProfilesExtension extends SimpleExtension
         return [
           '/' => new Backend($this->getConfig())
         ];
+    }
+
+    protected function registerTwigFunctions()
+    {
+        $this->twigFunctions = new Functions($this->getContainer(), $this->getConfig());
+
+        return [
+            'avatar' => 'avatarTwig',
+            'profile_link' => 'profileLinkTwig',
+            'has_profile' =>'hasProfileTwig',
+        ];
+    }
+
+    public function avatarTwig(array $user, $gravatar_size = 100, $fallback = null)
+    {
+        return $this->twigFunctions->avatar($user, $gravatar_size, $fallback);
+    }
+
+    public function profileLinkTwig(array $user)
+    {
+        return $this->twigFunctions->profileLink($user);
+    }
+
+    public function hasProfileTwig(array $user)
+    {
+        return $this->twigFunctions->hasProfile($user);
     }
 
     public function userEditFormWidgetCallback()
