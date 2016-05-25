@@ -1,8 +1,11 @@
 {
-    "name": "bolt/bolt-extension-starter",
-    "description": "",
+    "name": "ohlandt/user-profiles",
+    "description": "Extend the default Bolt users based on your needs and create public profile pages",
     "type": "bolt-extension",
     "keywords": [
+        "user",
+        "profiles",
+        "social"
     ],
     "require": {
         "bolt/bolt": "^3.0"
@@ -13,25 +16,25 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "",
-            "email": "you@example.com"
+            "name": "Phillipp Ohlandt",
+            "email": "phillipp.ohlandt@googlemail.com"
         }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Bolt\\Extension\\YourName\\ExtensionName\\": "src"
+            "Bolt\\Extension\\Ohlandt\\UserProfiles\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Bolt\\Extension\\YourName\\ExtensionName\\Tests\\": "tests",
+            "Bolt\\Extension\\Ohlandt\\UserProfiles\\Tests\\": "tests",
             "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
     },
     "extra": {
         "bolt-assets": "web",
-        "bolt-class": "Bolt\\Extension\\YourName\\ExtensionName\\ExtensionNameExtension"
+        "bolt-class": "Bolt\\Extension\\Ohlandt\\UserProfiles\\UserProfilesExtension"
     }
 }

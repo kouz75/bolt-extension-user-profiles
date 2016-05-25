@@ -1,7 +1,8 @@
 <?php
 
-namespace Bolt\Extension\YourName\ExtensionName\Tests;
+namespace Bolt\Extension\Ohlandt\UserProfiles\Tests;
 
+use Bolt\Extension\Ohlandt\UserProfiles\UserProfilesExtension;
 use Bolt\Tests\BoltUnitTest;
 use Bolt\Extension\YourName\ExtensionName\ExtensionNameExtension;
 
@@ -18,10 +19,10 @@ class ExtensionTest extends BoltUnitTest
     public function testExtensionBasics()
     {
         $app = $this->getApp(false);
-        $extension = new ExtensionNameExtension($app);
+        $extension = new UserProfilesExtension($app);
 
         $name = $extension->getName();
-        $this->assertSame($name, 'ExtensionName');
+        $this->assertSame($name, 'UserProfiles');
         $this->assertInstanceOf('\Bolt\Extension\ExtensionInterface', $extension);
     }
 
