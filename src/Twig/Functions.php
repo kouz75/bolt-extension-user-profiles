@@ -2,6 +2,7 @@
 
 namespace Bolt\Extension\Ohlandt\UserProfiles\Twig;
 
+use Bolt\Extension\Ohlandt\UserProfiles\Avatar\UrlResolver;
 use Silex\Application;
 
 class Functions
@@ -23,7 +24,13 @@ class Functions
 
     public function avatar(array $user, $gravatar_size = 100, $fallback = null)
     {
+        if ($fallback) {
+            $this->config['avatars']['fallback_url'] = $fallback;
+        }
 
+        $resolver = new UrlResolver($this->app, $this->config);
+
+        return $resolver->resolve($user, $gravatar_size);
     }
 
     public function profileLink(array $user)
