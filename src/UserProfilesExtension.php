@@ -2,8 +2,10 @@
 
 namespace Bolt\Extension\Ohlandt\UserProfiles;
 
+use Bolt\Controller\Zone;
 use Bolt\Events\SchemaEvent;
 use Bolt\Events\SchemaEvents;
+use Bolt\Extension\Ohlandt\UserProfiles\Controller\Backend;
 use Bolt\Extension\Ohlandt\UserProfiles\Storage\Schema\Table\UsersTable;
 use Bolt\Extension\SimpleExtension;
 use Bolt\Storage\Entity\Users;
@@ -27,7 +29,9 @@ class UserProfilesExtension extends SimpleExtension
     public function before(Request $request, Application $app)
     {
         //dump($app['users']->getCurrentUser());
-        $this->checkIfUserSessionHasToBeUpdated();
+        if(Zone::isBackend($request)){
+            $this->checkIfUserSessionHasToBeUpdated();
+        }
     }
 
     protected function registerServices(Application $app)
@@ -35,6 +39,35 @@ class UserProfilesExtension extends SimpleExtension
         $this->registerUsersTableSchema($app);
 
         $app->before([$this, 'before']);
+    }
+
+    protected function registerAssets()
+    {
+        $userEditFormWidget = new \Bolt\Asset\Widget\Widget();
+        $userEditFormWidget
+            ->setZone('backend')
+            ->setLocation('edituser_bottom')
+            ->setCallback([$this, 'userEditFormWidgetCallback'])
+            ->setCallbackArguments([])
+            ->setDefer(false)
+        ;
+
+        return [ $userEditFormWidget ];
+    }
+
+    protected function registerBackendControllers()
+    {
+        return [
+          '/' => new Backend($this->getConfig())
+        ];
+    }
+
+    public function userEditFormWidgetCallback()
+    {
+        return $this->renderTemplate('profile_extended.twig', [
+            'user' => $this->getContainer()['users']->getCurrentUser(),
+            'fields' => $this->getConfig()['fields'],
+        ]);
     }
 
     private function registerUsersTableSchema(Application $app)
@@ -62,6 +95,10 @@ class UserProfilesExtension extends SimpleExtension
         $config = $this->getConfig();
         $fields = $config['fields'];
         $user = $app['users']->getCurrentUser();
+
+        if(!$user){
+            return;
+        }
 
         $incomplete = false;
         foreach (array_keys($fields) as $key) {
