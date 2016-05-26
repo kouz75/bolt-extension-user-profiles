@@ -2,6 +2,7 @@
 
 namespace Bolt\Extension\Ohlandt\UserProfiles\Twig;
 
+use Bolt\Extension\Ohlandt\UserProfiles\AccessControl\Profile;
 use Bolt\Extension\Ohlandt\UserProfiles\Avatar\UrlResolver;
 use Silex\Application;
 
@@ -35,11 +36,17 @@ class Functions
 
     public function profileLink(array $user)
     {
+        if ($this->hasProfile($user)) {
+            return '/' . $this->config['profiles']['prefix'] . '/' . $user['username'];
+        }
 
+        return '';
     }
 
     public function hasProfile(array $user)
     {
+        $acceesControl = new Profile($this->app, $this->config);
 
+        return $acceesControl->hasProfile($user);
     }
 }
