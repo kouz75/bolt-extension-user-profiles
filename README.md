@@ -5,6 +5,10 @@ This [bolt.cm](https://bolt.cm/) extension lets you add new fields to the defaul
 You can also create public profiles for your users.
 It's pretty useful when your application depends on some records in a resource contenttype.
 
+---
+
+**Note:** If you are using Bolt 2.2.x, please use version 1.x of this extension
+
 ### Installation
 1. Login to your Bolt installation
 2. Go to "View/Install Extensions" (Hover over "Extras" menu item)
