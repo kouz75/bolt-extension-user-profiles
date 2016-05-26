@@ -45,8 +45,8 @@ class Functions
 
     public function hasProfile(array $user)
     {
-        $acceesControl = new Profile($this->app, $this->config);
+        $accessControl = new Profile($this->app, $this->config);
 
-        return $acceesControl->hasProfile($user);
+        return $accessControl->hasProfile($user);
     }
 }
