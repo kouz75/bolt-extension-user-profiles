@@ -21,7 +21,7 @@ There you can define new fields for your users, setup some options for the avata
 
 ### Access Extended User Profile Form
 
-Simply go to Extras => Extended Profile
+Simply go to your normal profile edit page at `/bolt/profile`. It appears as an extra form below the standard user edit form.
 
 Twig Helper Functions
 ---------------------
