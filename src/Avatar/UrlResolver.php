@@ -11,7 +11,7 @@ class UrlResolver
     protected $config;
 
     /**
-     * AvatarUrlResolver constructor.
+     * AvatarUrlResolver constructor
      *
      * @param Application $app
      * @param array $config

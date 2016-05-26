@@ -23,11 +23,22 @@ class UserProfilesExtension extends SimpleExtension
 {
     private $twigFunctions;
 
+    /**
+     * @inheritdoc
+     *
+     * @param Application $app
+     */
     public function boot(Application $app)
     {
         parent::boot($app);
     }
 
+    /**
+     * @inheritdoc
+     *
+     * @param Request $request
+     * @param Application $app
+     */
     public function before(Request $request, Application $app)
     {
         //dump($app['users']->getCurrentUser());
@@ -36,6 +47,11 @@ class UserProfilesExtension extends SimpleExtension
         }
     }
 
+    /**
+     * @inheritdoc
+     *
+     * @param Application $app
+     */
     protected function registerServices(Application $app)
     {
         $this->registerUsersTableSchema($app);
@@ -43,6 +59,11 @@ class UserProfilesExtension extends SimpleExtension
         $app->before([$this, 'before']);
     }
 
+    /**
+     * @inheritdoc
+     *
+     * @return array
+     */
     protected function registerAssets()
     {
         $userEditFormWidget = new \Bolt\Asset\Widget\Widget();
@@ -56,6 +77,11 @@ class UserProfilesExtension extends SimpleExtension
         return [$userEditFormWidget];
     }
 
+    /**
+     * @inheritdoc
+     *
+     * @return array
+     */
     protected function registerBackendControllers()
     {
         return [
@@ -63,6 +89,11 @@ class UserProfilesExtension extends SimpleExtension
         ];
     }
 
+    /**
+     * @inheritdoc
+     *
+     * @return array
+     */
     protected function registerFrontendControllers()
     {
         return [
@@ -70,6 +101,11 @@ class UserProfilesExtension extends SimpleExtension
         ];
     }
 
+    /**
+     * @inheritdoc
+     *
+     * @return array
+     */
     protected function registerTwigFunctions()
     {
         $this->twigFunctions = new Functions($this->getContainer(), $this->getConfig());
@@ -81,21 +117,49 @@ class UserProfilesExtension extends SimpleExtension
         ];
     }
 
+    /**
+     * Router for the twig function
+     * to pass the data to the real implementation
+     *
+     * @param array $user
+     * @param int $gravatar_size
+     * @param null $fallback
+     * @return mixed
+     */
     public function avatarTwig(array $user, $gravatar_size = 100, $fallback = null)
     {
         return $this->twigFunctions->avatar($user, $gravatar_size, $fallback);
     }
 
+    /**
+     * Router for the twig function
+     * to pass the data to the real implementation
+     *
+     * @param array $user
+     * @return mixed
+     */
     public function profileLinkTwig(array $user)
     {
         return $this->twigFunctions->profileLink($user);
     }
 
+    /**
+     * Router for the twig function
+     * to pass the data to the real implementation
+     *
+     * @param array $user
+     * @return mixed
+     */
     public function hasProfileTwig(array $user)
     {
         return $this->twigFunctions->hasProfile($user);
     }
 
+    /**
+     * Callback for the Widget on the user edit form
+     *
+     * @return string
+     */
     public function userEditFormWidgetCallback()
     {
         return $this->renderTemplate('profile_extended.twig', [
@@ -104,6 +168,12 @@ class UserProfilesExtension extends SimpleExtension
         ]);
     }
 
+    /**
+     * Register own table schema class for the users table
+     * to add all custom fields
+     *
+     * @param Application $app
+     */
     private function registerUsersTableSchema(Application $app)
     {
         $config = $this->getConfig();
@@ -123,6 +193,11 @@ class UserProfilesExtension extends SimpleExtension
         );
     }
 
+    /**
+     * After the users table was altered, the user object
+     * in the session still has the old schema and needs
+     * to be updated eventually.
+     */
     private function checkIfUserSessionHasToBeUpdated()
     {
         $app = $this->getContainer();
@@ -152,6 +227,11 @@ class UserProfilesExtension extends SimpleExtension
         }
     }
 
+    /**
+     * Such name, much pretty
+     *
+     * @return string
+     */
     public function getDisplayName()
     {
         return "User Profiles";

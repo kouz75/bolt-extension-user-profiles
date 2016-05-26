@@ -17,12 +17,26 @@ class Functions
      */
     private $config;
 
+    /**
+     * Functions constructor
+     *
+     * @param Application $app
+     * @param array $config
+     */
     public function __construct(Application $app, array $config)
     {
         $this->app = $app;
         $this->config = $config;
     }
 
+    /**
+     * Twig helper function to get an avatar URL for a given user, based on the extension config
+     *
+     * @param array $user
+     * @param int $gravatar_size
+     * @param null $fallback
+     * @return bool|string
+     */
     public function avatar(array $user, $gravatar_size = 100, $fallback = null)
     {
         if ($fallback) {
@@ -34,6 +48,12 @@ class Functions
         return $resolver->resolve($user, $gravatar_size);
     }
 
+    /**
+     * Twig helper function to get the profile URL for a given user
+     *
+     * @param array $user
+     * @return string
+     */
     public function profileLink(array $user)
     {
         if ($this->hasProfile($user)) {
@@ -43,6 +63,12 @@ class Functions
         return '';
     }
 
+    /**
+     * Twig helper to determine if the given user has a public profile
+     *
+     * @param array $user
+     * @return bool
+     */
     public function hasProfile(array $user)
     {
         $accessControl = new Profile($this->app, $this->config);

@@ -4,7 +4,6 @@ namespace Bolt\Extension\Ohlandt\UserProfiles\Controller;
 
 use Bolt\Controller\Zone;
 use Bolt\Extension\Ohlandt\UserProfiles\AccessControl\Profile;
-use Bolt\Storage\Entity\Users;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
@@ -15,6 +14,11 @@ class Frontend implements ControllerProviderInterface
 {
     private $config;
 
+    /**
+     * Frontend controller constructor
+     *
+     * @param array $config
+     */
     public function __construct(array $config)
     {
         $this->config = $config;
@@ -40,6 +44,15 @@ class Frontend implements ControllerProviderInterface
         return $ctr;
     }
 
+    /**
+     * Get the user based on the url parameter and
+     * render the profile template
+     *
+     * @param Request $request
+     * @param Application $app
+     * @param $username
+     * @return mixed
+     */
     public function profile(Request $request, Application $app, $username)
     {
         $accessControl = New Profile($app, $this->config);

@@ -9,6 +9,13 @@ class UsersTable extends Users
 {
     private $config;
 
+    /**
+     * UsersTable constructor
+     *
+     * @param AbstractPlatform $platform
+     * @param string $tablePrefix
+     * @param array $config
+     */
     public function __construct(AbstractPlatform $platform, $tablePrefix, array $config)
     {
         parent::__construct($platform, $tablePrefix);
@@ -16,6 +23,9 @@ class UsersTable extends Users
         $this->config = $config;
     }
 
+    /**
+     *  Add custom fields to the users table schema
+     */
     protected function addColumns()
     {
         parent::addColumns();

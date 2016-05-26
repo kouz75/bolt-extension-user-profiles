@@ -15,6 +15,12 @@ class Profile
      */
     private $config;
 
+    /**
+     * Profile constructor
+     *
+     * @param Application $app
+     * @param array $config
+     */
     public function __construct(Application $app, array $config)
     {
         $this->app = $app;

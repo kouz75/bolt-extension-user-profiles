@@ -14,13 +14,18 @@ class Backend implements ControllerProviderInterface
 {
     private $config;
 
+    /**
+     * Backend controller constructor
+     *
+     * @param array $config
+     */
     public function __construct(array $config)
     {
         $this->config = $config;
     }
 
     /**
-     * Returns routes to connect to the given application.
+     * Returns routes to connect to the given application
      *
      * @param Application $app An Application instance
      *
@@ -39,6 +44,13 @@ class Backend implements ControllerProviderInterface
         return $ctr;
     }
 
+    /**
+     * Saves the user extended user information
+     *
+     * @param Request $request
+     * @param Application $app
+     * @return RedirectResponse
+     */
     public function profileSave(Request $request, Application $app)
     {
         $user = $app['users']->getCurrentUser();
@@ -60,6 +72,13 @@ class Backend implements ControllerProviderInterface
         return new RedirectResponse($app['routes']->get('profile')->getPath());
     }
 
+    /**
+     * After the user was updated in the DB,
+     * the object in the session has to be updated too
+     *
+     * @param Application $app
+     * @param Users $user
+     */
     private function updateUserInSession(Application $app, Users $user)
     {
         $token = $app['session']->get('authentication');
@@ -67,6 +86,15 @@ class Backend implements ControllerProviderInterface
         $app['session']->set('authentication', $token);
     }
 
+    /**
+     * Clean up POST data from extended user profile form
+     * - Remove all Bolt reserved keys
+     * - Remove all keys which are not in the user object to avoid mysql errors
+     *
+     * @param array $data
+     * @param array $user
+     * @return array
+     */
     private function cleanupPostData(array $data, array $user)
     {
         $notallowedcolumns = array(
