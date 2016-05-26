@@ -28,7 +28,7 @@ class UsersTable extends Users
                     break;
                 case 'textarea':
                 case 'select':
-                $this->table->addColumn($key, 'text', array('default' => ''));
+                    $this->table->addColumn($key, 'text', array('default' => ''));
                     break;
                 case 'checkbox':
                     $this->table->addColumn($key, 'boolean', array('default' => 0));

@@ -3,8 +3,6 @@
 namespace Bolt\Extension\Ohlandt\UserProfiles;
 
 use Bolt\Controller\Zone;
-use Bolt\Events\SchemaEvent;
-use Bolt\Events\SchemaEvents;
 use Bolt\Extension\Ohlandt\UserProfiles\Controller\Backend;
 use Bolt\Extension\Ohlandt\UserProfiles\Controller\Frontend;
 use Bolt\Extension\Ohlandt\UserProfiles\Storage\Schema\Table\UsersTable;
@@ -33,7 +31,7 @@ class UserProfilesExtension extends SimpleExtension
     public function before(Request $request, Application $app)
     {
         //dump($app['users']->getCurrentUser());
-        if(Zone::isBackend($request)){
+        if (Zone::isBackend($request)) {
             $this->checkIfUserSessionHasToBeUpdated();
         }
     }
@@ -53,16 +51,15 @@ class UserProfilesExtension extends SimpleExtension
             ->setLocation('edituser_bottom')
             ->setCallback([$this, 'userEditFormWidgetCallback'])
             ->setCallbackArguments([])
-            ->setDefer(false)
-        ;
+            ->setDefer(false);
 
-        return [ $userEditFormWidget ];
+        return [$userEditFormWidget];
     }
 
     protected function registerBackendControllers()
     {
         return [
-          '/' => new Backend($this->getConfig())
+            '/' => new Backend($this->getConfig())
         ];
     }
 
@@ -80,7 +77,7 @@ class UserProfilesExtension extends SimpleExtension
         return [
             'avatar' => 'avatarTwig',
             'profile_link' => 'profileLinkTwig',
-            'has_profile' =>'hasProfileTwig',
+            'has_profile' => 'hasProfileTwig',
         ];
     }
 
@@ -133,7 +130,7 @@ class UserProfilesExtension extends SimpleExtension
         $fields = $config['fields'];
         $user = $app['users']->getCurrentUser();
 
-        if(!$user){
+        if (!$user) {
             return;
         }
 
@@ -160,3 +157,4 @@ class UserProfilesExtension extends SimpleExtension
         return "User Profiles";
     }
 }
+

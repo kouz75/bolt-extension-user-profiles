@@ -51,7 +51,7 @@ class Frontend implements ControllerProviderInterface
         }
 
 
-        return $tapp['twig']->render($this->config['profiles']['template'], [
+        return $app['twig']->render($this->config['profiles']['template'], [
             'user' => $user
         ]);
     }

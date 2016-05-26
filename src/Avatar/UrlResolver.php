@@ -89,3 +89,4 @@ class UrlResolver
         return false;
     }
 }
+
