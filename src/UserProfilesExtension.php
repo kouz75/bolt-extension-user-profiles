@@ -6,6 +6,7 @@ use Bolt\Controller\Zone;
 use Bolt\Events\SchemaEvent;
 use Bolt\Events\SchemaEvents;
 use Bolt\Extension\Ohlandt\UserProfiles\Controller\Backend;
+use Bolt\Extension\Ohlandt\UserProfiles\Controller\Frontend;
 use Bolt\Extension\Ohlandt\UserProfiles\Storage\Schema\Table\UsersTable;
 use Bolt\Extension\Ohlandt\UserProfiles\Twig\Functions;
 use Bolt\Extension\SimpleExtension;
@@ -62,6 +63,13 @@ class UserProfilesExtension extends SimpleExtension
     {
         return [
           '/' => new Backend($this->getConfig())
+        ];
+    }
+
+    protected function registerFrontendControllers()
+    {
+        return [
+            '/' => new Frontend($this->getConfig())
         ];
     }
 

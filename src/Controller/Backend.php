@@ -34,8 +34,7 @@ class Backend implements ControllerProviderInterface
 
         $ctr->match('profile/extended-save', [$this, 'profileSave'])
             ->bind('profileExtendedSave')
-            ->method(Request::METHOD_POST)
-        ;
+            ->method(Request::METHOD_POST);
 
         return $ctr;
     }
