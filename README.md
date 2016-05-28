@@ -11,7 +11,7 @@ It's pretty useful when your application depends on some records in a resource c
 
 ### Installation
 1. Login to your Bolt installation
-2. Go to "View/Install Extensions" (Hover over "Extras" menu item)
+2. Go to "Extend" or "Extras > Extend"
 3. Type `user-profiles` into the input field
 4. Click on the extension name
 5. Click on "Browse Versions"
