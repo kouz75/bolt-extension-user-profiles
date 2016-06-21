@@ -19,7 +19,7 @@ It's pretty useful when your application depends on some records in a resource c
 
 ### Configuration
 
-You can find the configuration file in `app\config\extensions` as `user-profiles.ohlandt.yml`.
+You can find the configuration file in `app\config\extensions` as `userprofiles.ohlandt.yml`.
 
 There you can define new fields for your users, setup some options for the avatar helper and the public user profiles.
 
