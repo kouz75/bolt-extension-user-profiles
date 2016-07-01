@@ -69,7 +69,7 @@ class Backend implements ControllerProviderInterface
 
         $app['logger.flash']->success("Extended profile information has been saved.");
 
-        return new RedirectResponse($app['routes']->get('profile')->getPath());
+        return new RedirectResponse($app["request"]->getBaseUrl() . $app['routes']->get('profile')->getPath());
     }
 
     /**
