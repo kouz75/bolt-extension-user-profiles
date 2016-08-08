@@ -4,12 +4,11 @@ namespace Bolt\Extension\Ohlandt\UserProfiles\Tests;
 
 use Bolt\Extension\Ohlandt\UserProfiles\UserProfilesExtension;
 use Bolt\Tests\BoltUnitTest;
-use Bolt\Extension\YourName\ExtensionName\ExtensionNameExtension;
 
 /**
- * ExtensionName testing class.
+ * UserProfiles testing class.
  *
- * @author Your Name <you@example.com>
+ * @author Phillipp Ohlandt <phillipp.ohlandt@googlemail.com>
  */
 class ExtensionTest extends BoltUnitTest
 {
