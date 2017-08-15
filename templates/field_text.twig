@@ -17,7 +17,7 @@
 {#=== INIT ===========================================================================================================#}
 
 {% set attr_text = {
-    class:          option.class ~ ' form-control',
+    class:          option.class ~ ' form-control large',
     name:           name,
     required:       option.required,
     pattern:        (option.pattern and option.pattern not in ['url', 'email']) ? option.pattern : '',
