@@ -1,3 +1,5 @@
+{% from '@bolt/_macro/_macro.twig' import attr %}
+
 {#=== OPTIONS ========================================================================================================#}
 
 {% set option = {
@@ -51,7 +53,7 @@
                     } %}
                 {% endif %}
 
-                <option{{ macro.attr(attr_opt) }}>{{ value }}</option>
+                <option{{ attr(attr_opt) }}>{{ value }}</option>
             {% endfor %}
         </select>
     </div>
