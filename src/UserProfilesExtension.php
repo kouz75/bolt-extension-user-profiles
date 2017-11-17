@@ -13,6 +13,7 @@ use Silex\Application;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Bolt\Twig\ArrayAccessSecurityProxy;
 
 /**
  * User Profiles extension class.
@@ -121,12 +122,12 @@ class UserProfilesExtension extends SimpleExtension
      * Router for the twig function
      * to pass the data to the real implementation
      *
-     * @param array $user
+     * @param ArrayAccessSecurityProxy $user
      * @param int $gravatar_size
      * @param null $fallback
      * @return mixed
      */
-    public function avatarTwig(array $user, $gravatar_size = 100, $fallback = null)
+    public function avatarTwig(ArrayAccessSecurityProxy $user, $gravatar_size = 100, $fallback = null)
     {
         return $this->twigFunctions->avatar($user, $gravatar_size, $fallback);
     }
