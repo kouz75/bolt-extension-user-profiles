@@ -5,7 +5,7 @@ namespace Bolt\Extension\Ohlandt\UserProfiles\Twig;
 use Bolt\Extension\Ohlandt\UserProfiles\AccessControl\Profile;
 use Bolt\Extension\Ohlandt\UserProfiles\Avatar\UrlResolver;
 use Silex\Application;
-
+use Bolt\Twig\ArrayAccessSecurityProxy;
 class Functions
 {
     /**
@@ -32,12 +32,12 @@ class Functions
     /**
      * Twig helper function to get an avatar URL for a given user, based on the extension config
      *
-     * @param array $user
+     * @param ArrayAccessSecurityProxy $user
      * @param int $gravatar_size
      * @param null $fallback
      * @return bool|string
      */
-    public function avatar(array $user, $gravatar_size = 100, $fallback = null)
+    public function avatar(ArrayAccessSecurityProxy $user, $gravatar_size = 100, $fallback = null)
     {
         if ($fallback) {
             $this->config['avatars']['fallback_url'] = $fallback;
@@ -51,10 +51,10 @@ class Functions
     /**
      * Twig helper function to get the profile URL for a given user
      *
-     * @param array $user
+     * @param ArrayAccessSecurityProxy $user
      * @return string
      */
-    public function profileLink(array $user)
+    public function profileLink(ArrayAccessSecurityProxy $user)
     {
         if ($this->hasProfile($user)) {
             return '/' . $this->config['profiles']['prefix'] . '/' . $user['username'];
