@@ -3,7 +3,7 @@
 namespace Bolt\Extension\Ohlandt\UserProfiles\Avatar;
 
 use Silex\Application;
-
+use Bolt\Twig\ArrayAccessSecurityProxy;
 class UrlResolver
 {
     protected $app;
@@ -26,11 +26,11 @@ class UrlResolver
     /**
      * Resolve the avatar URL for a given user
      *
-     * @param array $user
+     * @param ArrayAccessSecurityProxy $user
      * @param int $gravatar_size
      * @return bool|string
      */
-    public function resolve(array $user, $gravatar_size = 100)
+    public function resolve(ArrayAccessSecurityProxy $user, $gravatar_size = 100)
     {
         if ($field = $this->config['avatars']['field']) {
             if ($user[$field] != '') {
@@ -44,11 +44,11 @@ class UrlResolver
     /**
      * Get the Gravatar or fallback URL for a given user
      *
-     * @param array $user
+     * @param ArrayAccessSecurityProxy $user
      * @param $gravatar_size
      * @return bool|string
      */
-    protected function getGravatarOrFallbackUrl(array $user, $gravatar_size)
+    protected function getGravatarOrFallbackUrl(ArrayAccessSecurityProxy $user, $gravatar_size)
     {
         $config = $this->config;
 
@@ -66,11 +66,11 @@ class UrlResolver
     /**
      * Get the Gravatar URL for a given user
      *
-     * @param array $user
+     * @param ArrayAccessSecurityProxy $user
      * @param $gravatar_size
      * @return bool|string
      */
-    protected function getGravatarUrl(array $user, $gravatar_size)
+    protected function getGravatarUrl(ArrayAccessSecurityProxy $user, $gravatar_size)
     {
         $config = $this->config;
 
